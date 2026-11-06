@@ -85,6 +85,9 @@ function handleDelete(id) {  setNotes(notes.filter((note) => note.id !== id))}
             </li>
         ))}
         </ul>
+        {notes.length === 0 && (
+            <p className="text-lg text-[#949494]">No notes found</p>
+        )}
         </section>
     </div>
     )
