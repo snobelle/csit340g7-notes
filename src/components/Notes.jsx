@@ -70,6 +70,7 @@ const visibleNotes = notes.filter((note) =>
         <form onSubmit={handleSubmit} className="grid gap-3">
             <p className="text-[13px] font-normal tracking-wide text-[#949494]">NEW NOTE</p>
             <input
+            ref={titleRef}
             name="title"
             value={form.title}
             onChange={handleChange}
