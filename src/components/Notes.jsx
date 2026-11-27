@@ -1,5 +1,5 @@
 import NoteCard from './NoteCard.jsx'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function Notes() {
  const [notes, setNotes] = useState([
@@ -15,16 +15,16 @@ function Notes() {
     },
   ])
   const [form, setForm] = useState({ title: '', body: '' })
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('') 
+  const titleRef = useRef(null)
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
-  
+
   useEffect(() => {
     const id = setTimeout(() => {
       localStorage.setItem('draft', JSON.stringify(form))
-      console.log('draft saved:', form.title)
     }, 1000)
     return () => clearTimeout(id)
   }, [form])
@@ -41,6 +41,7 @@ function handleSubmit(e) {
     if (!title || !body) return
     setNotes([...notes, { id: crypto.randomUUID(), title, body }])
     setForm({ title: '', body: '' })
+    titleRef.current.focus()
 }
 
 function handleDelete(id) {  setNotes(notes.filter((note) => note.id !== id))}
